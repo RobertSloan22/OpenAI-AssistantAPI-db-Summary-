@@ -77,18 +77,6 @@ channels = [
 ]
 
 # Function to fetch Discord messages
-def fetch_discord_messages(channel_id):
-    url = f"https://discord.com/api/v9/channels/{channel_id}/messages?limit=100"
-    try:
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            st.error(f"Failed to fetch messages for channel {channel_id}: HTTP {response.status_code} - {response.text}")
-            return []
-    except requests.exceptions.RequestException as e:
-        st.error(f"Request exception for channel {channel_id}: {e}")
-        return []
 
 # Function to insert new messages into TinyDB
 def insert_new_messages(messages, channel_id, nickname):
@@ -389,6 +377,3 @@ if command == "Natural Language Query":
         except Exception as e:
             st.error(f"Error generating response: {e}")
 
-if command == "SoraBot":
-    st.write("Running SoraBot...")
-    run_sorabot()
